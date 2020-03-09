@@ -1,6 +1,7 @@
 package com.rasmusrim.sudoku;
 
 import java.util.ArrayList;
+import com.rasmusrim.sudoku.gui.Gui;
 
 public class Controller {
 	private Gui gui;

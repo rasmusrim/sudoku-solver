@@ -1,4 +1,4 @@
-package com.rasmusrim.sudoku;
+package com.rasmusrim.sudoku.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

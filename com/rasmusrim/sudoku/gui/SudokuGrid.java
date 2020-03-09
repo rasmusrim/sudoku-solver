@@ -1,8 +1,10 @@
-package com.rasmusrim.sudoku;
+package com.rasmusrim.sudoku.gui;
+
+import com.rasmusrim.sudoku.models.NonEmptyCell;
+import com.rasmusrim.sudoku.models.Table;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComponent;
@@ -10,7 +12,6 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
@@ -67,6 +68,27 @@ public class SudokuGrid implements KeyListener {
 
 	}
 
+	public Table getTable() {
+		Table table = new Table(this.getSize());
+
+		for (int column = 0; column < size * size; column++) {
+			for (int row = 0; row < size * size; row++) {
+				int value = Integer.parseInt(cells[column][row].getText());
+				NonEmptyCell nonEmptyCell = new NonEmptyCell();
+				nonEmptyCell.setColumn(column);
+				nonEmptyCell.setRow(row);
+				nonEmptyCell.setValue(value);
+
+				table.addCell(column, row, nonEmptyCell);
+			}
+
+		}
+
+		System.out.println(table.toString());
+
+		return table;
+	}
+
 	public void keyPressed(KeyEvent e) {
 
 		JComponent source = (JComponent) e.getComponent();
@@ -94,6 +116,10 @@ public class SudokuGrid implements KeyListener {
 				column++;
 			}
 			break;
+			case KeyEvent.VK_ENTER:
+				getTable();
+				break;
+
 		}
 
 		cells[column][row].grabFocus();
