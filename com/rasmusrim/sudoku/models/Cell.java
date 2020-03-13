@@ -1,6 +1,6 @@
 package com.rasmusrim.sudoku.models;
 
-public class Cell {
+public class Cell implements Cloneable {
     private int column;
     private int row;
     private int value;
@@ -35,6 +35,10 @@ public class Cell {
 
     public String toString() {
         return Integer.toString(this.value);
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
 

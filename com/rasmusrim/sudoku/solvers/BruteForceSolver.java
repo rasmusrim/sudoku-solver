@@ -15,19 +15,23 @@ public class BruteForceSolver implements Cloneable {
     public Table solve() throws CloneNotSupportedException {
         int size = table.getSize();
         int sizeSquared = size * size;
-        Table clonedTable;
 
-        clonedTable = (Table) table.clone();
+
         int attempt = 0;
+        Table clonedTable;
 
         while(true) {
             attempt++;
+
+
             System.out.println("Attempt " + attempt);
+            clonedTable = (Table) getTable().clone();
+
             for (int column = 0; column < sizeSquared; column++) {
                 for (int row = 0; row < sizeSquared; row++) {
                     Cell cell = clonedTable.getCell(column, row);
                     if (cell.getValue() == -1) {
-                        int randomValue = (int) Math.round(Math.random() * (sizeSquared - 1) + 1);
+                        int randomValue = (int) Math.round(Math.random() * (sizeSquared - 1)) + 1;
                         cell.setValue(randomValue);
                     }
                 }
@@ -37,6 +41,7 @@ public class BruteForceSolver implements Cloneable {
             if (clonedTable.isValid()) {
                 break;
             }
+
 
         }
 

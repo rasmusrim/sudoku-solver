@@ -109,7 +109,16 @@ public class Table implements Cloneable {
     }
 
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        Table clonedTable = new Table(getSize());
+        int squaredSize = getSize() * getSize();
+        for (int columnIndex = 0; columnIndex < squaredSize; columnIndex++) {
+            for (int rowIndex = 0; rowIndex < squaredSize; rowIndex++) {
+                clonedTable.addCell(columnIndex, rowIndex, (Cell) this.getCell(columnIndex, rowIndex).clone());
+
+            }
+        }
+
+        return clonedTable;
 
     }
 
