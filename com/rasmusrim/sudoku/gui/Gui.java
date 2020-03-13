@@ -1,5 +1,7 @@
 package com.rasmusrim.sudoku.gui;
 
+import com.rasmusrim.sudoku.models.Table;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,13 +15,12 @@ import javax.swing.JToolBar;
 
 public class Gui implements ActionListener {
 	private int size;
-	private Consumer<ArrayList> onSolve;
+	private Consumer<Table> onSolve;
 	private SudokuGrid sudokuGrid;
 	private JButton btnDecreaseSize;
 	private JButton btnIncreaseSize;
-	
-	
-	public Gui(int size, Consumer<ArrayList> onSolve) {
+
+	public Gui(int size, Consumer<Table> onSolve) {
 		this.setSize(size);
 		this.setOnSolve(onSolve);
 
@@ -80,8 +81,8 @@ public class Gui implements ActionListener {
 
 		switch (command) {
 		case "solveSudoku":
-			Consumer<ArrayList> onSolve = this.getOnSolve();
-			onSolve.accept(new ArrayList());
+
+			onSolve.accept(sudokuGrid.getTable());
 			break;
 		case "increaseSize":
 			increaseSize();
@@ -138,11 +139,11 @@ public class Gui implements ActionListener {
 		this.size = size;
 	}
 
-	public Consumer<ArrayList> getOnSolve() {
+	public Consumer<Table> getOnSolve() {
 		return onSolve;
 	}
 
-	public void setOnSolve(Consumer<ArrayList> onSolve) {
+	public void setOnSolve(Consumer<Table> onSolve) {
 		this.onSolve = onSolve;
 	}
 

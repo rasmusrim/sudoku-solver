@@ -1,6 +1,6 @@
 package com.rasmusrim.sudoku.gui;
 
-import com.rasmusrim.sudoku.models.NonEmptyCell;
+import com.rasmusrim.sudoku.models.Cell;
 import com.rasmusrim.sudoku.models.Table;
 
 import java.awt.Font;
@@ -56,6 +56,7 @@ public class SudokuGrid implements KeyListener {
 				cell.addKeyListener(this);
 				cell.putClientProperty("column", column);
 				cell.putClientProperty("row", row);
+				//cell.setText(Integer.toString((int) Math.round(Math.random() * 8 + 1)));
 				sudokuBox.add(cell);
 
 				cells[column][row] = cell;
@@ -73,18 +74,17 @@ public class SudokuGrid implements KeyListener {
 
 		for (int column = 0; column < size * size; column++) {
 			for (int row = 0; row < size * size; row++) {
-				int value = Integer.parseInt(cells[column][row].getText());
-				NonEmptyCell nonEmptyCell = new NonEmptyCell();
-				nonEmptyCell.setColumn(column);
-				nonEmptyCell.setRow(row);
-				nonEmptyCell.setValue(value);
+				try {
+					int value = Integer.parseInt(cells[column][row].getText().trim());
+					Cell cell = new Cell();
+					cell.setValue(value);
+					table.addCell(column, row, cell);
+				} catch (NumberFormatException e) {
+				}
 
-				table.addCell(column, row, nonEmptyCell);
 			}
 
 		}
-
-		System.out.println(table.toString());
 
 		return table;
 	}

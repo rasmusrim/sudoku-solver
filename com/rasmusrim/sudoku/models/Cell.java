@@ -1,8 +1,13 @@
 package com.rasmusrim.sudoku.models;
 
-abstract class Cell {
+public class Cell {
     private int column;
     private int row;
+    private int value;
+
+    public Cell() {
+        this.setValue(-1);
+    }
 
     public int getColumn() {
         return column;
@@ -20,8 +25,17 @@ abstract class Cell {
         this.row = row;
     }
 
-    abstract public String toString();
-    abstract public int getValue();
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String toString() {
+        return Integer.toString(this.value);
+    }
 
 
 
