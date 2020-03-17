@@ -2,7 +2,9 @@ package com.rasmusrim.sudoku;
 
 import com.rasmusrim.sudoku.gui.Gui;
 import com.rasmusrim.sudoku.models.Table;
+import com.rasmusrim.sudoku.solvers.AlgorithmicSolver;
 import com.rasmusrim.sudoku.solvers.BruteForceSolver;
+import com.rasmusrim.sudoku.solvers.Solver;
 
 public class Controller {
     private Gui gui;
@@ -29,8 +31,7 @@ public class Controller {
             throw new Exception("Table invalid");
         }
 
-        BruteForceSolver solver = new BruteForceSolver(table);
-        solver.setTable(table);
+        Solver solver = new AlgorithmicSolver(table);
         Table solvedTable = solver.solve();
         System.out.println(solvedTable.toString());
     }

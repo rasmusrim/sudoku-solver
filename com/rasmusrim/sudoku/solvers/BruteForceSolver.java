@@ -4,7 +4,7 @@ import com.rasmusrim.sudoku.models.Cell;
 import com.rasmusrim.sudoku.models.CellCluster;
 import com.rasmusrim.sudoku.models.Table;
 
-public class BruteForceSolver implements Cloneable {
+public class BruteForceSolver implements Solver {
 
     private Table table;
 
@@ -12,7 +12,7 @@ public class BruteForceSolver implements Cloneable {
         setTable(table);
     }
 
-    public Table solve() throws CloneNotSupportedException {
+    public Table solve() {
         int size = table.getSize();
         int sizeSquared = size * size;
 
@@ -24,8 +24,13 @@ public class BruteForceSolver implements Cloneable {
             attempt++;
 
 
-            System.out.println("Attempt " + attempt);
-            clonedTable = (Table) getTable().clone();
+            System.out.println("Attempt " + attempt + "\r");
+            try {
+                clonedTable = (Table) getTable().clone();
+            } catch (CloneNotSupportedException e) {
+                System.out.println(e.getMessage());
+                return getTable();
+            }
 
             for (int column = 0; column < sizeSquared; column++) {
                 for (int row = 0; row < sizeSquared; row++) {

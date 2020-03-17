@@ -26,6 +26,11 @@ public class CellCluster {
         return true;
     }
 
+    public Cell getCell(int index) {
+
+        return getCells().get(index);
+    }
+
     public ArrayList<Cell> getCells() {
         return cells;
     }
@@ -36,6 +41,10 @@ public class CellCluster {
 
     public String toString() {
         return cells.toString();
+    }
+
+    public int getSize() {
+        return getCells().size();
     }
 
 }

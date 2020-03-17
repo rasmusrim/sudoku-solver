@@ -11,7 +11,10 @@ public class Table implements Cloneable {
         int sizeSquared = getSize() * getSize();
         for (int column = 0; column < sizeSquared; column++) {
             for (int row = 0; row < sizeSquared; row++) {
-                this.addCell(column, row, new Cell());
+                Cell cell = new Cell();
+                cell.setColumn(column);
+                cell.setRow(row);
+                this.addCell(column, row, cell);
 
             }
 
@@ -45,6 +48,24 @@ public class Table implements Cloneable {
         return true;
 
     }
+
+    public boolean hasEmptyCell() {
+        int sizeSquared = this.getSize() * this.getSize();
+
+        for (int row = 0; row < sizeSquared; row++) {
+
+            for (int column = 0; column < sizeSquared; column++) {
+                Cell cell = this.getCell(column, row);
+                if (cell.getValue() == -1) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
 
     public String toString() {
         int sizeSquared = this.getSize() * this.getSize();
@@ -100,12 +121,12 @@ public class Table implements Cloneable {
     }
 
     public CellCluster getColumn(int columnIndex) {
-        CellCluster row = new CellCluster();
+        CellCluster column = new CellCluster();
         for (int rowIndex = 0; rowIndex < getSize() * getSize(); rowIndex++) {
-            row.add(this.getCell(columnIndex, rowIndex));
+            column.add(this.getCell(columnIndex, rowIndex));
         }
 
-        return row;
+        return column;
     }
 
     public Object clone() throws CloneNotSupportedException {
